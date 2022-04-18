@@ -12,13 +12,6 @@ const typeDefs = gql`
     friends: [User]
   }
 
-  type Query {
-    users: [User]
-    user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(_id: ID!): Thought
-  }
-
   type Thought {
     _id: ID
     thoughtText: String
@@ -36,7 +29,21 @@ const typeDefs = gql`
   }
 
   type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
     thoughts(username: String): [Thought]
+    thought(_id: ID!): Thought
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+  }
+
+  type Auth {
+    token: ID!
+    user: User
   }
 `;
 
